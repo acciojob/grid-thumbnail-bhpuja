@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Grid Thumbnails</title>
+    <title>Grid Thumbnail Viewer</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -23,6 +23,7 @@
 
         .thumbnail {
             width: 100%;
+            height: auto;
             cursor: pointer;
             transition: transform 0.3s ease-in-out;
             border-radius: 5px;
@@ -32,7 +33,7 @@
             transform: scale(1.05);
         }
 
-        .fullsize {
+        #fullsize {
             display: none;
             width: 100%;
             height: auto;
@@ -56,7 +57,7 @@
         <img id="thumbnail2" class="thumbnail" src="https://imgd.aeplcdn.com/1056x594/n/cw/ec/46749/tvs-jupiter-front-three-quarter25.jpeg?q=75" onclick="expandImage(this)">
         <img id="thumbnail3" class="thumbnail" src="https://www.motorbeam.com/wp-content/uploads/TVS-Jupiter-Classic-Edition.jpg" onclick="expandImage(this)">
         
-        <img id="fullsize" class="fullsize" onclick="collapseImage()">
+        <img id="fullsize" onclick="collapseImage()">
     </div>
 
     <script>
@@ -64,16 +65,14 @@
 
         function expandImage(imgElement) {
             let fullsize = document.getElementById("fullsize");
-            let thumbnails = document.querySelectorAll("thumbnail");
-            let gridContainer = document.getElementById("imageGrid");
+            let thumbnails = document.querySelectorAll(".thumbnail");
 
             if (isExpanded && fullsize.src === imgElement.src) {
-                // Collapse back to grid view
                 collapseImage();
             } else {
-                // Expand the clicked image
                 fullsize.src = imgElement.src;
                 fullsize.classList.add("expanded");
+                fullsize.style.display = "block";
                 thumbnails.forEach(img => img.style.display = "none");
                 isExpanded = true;
             }
@@ -81,10 +80,10 @@
 
         function collapseImage() {
             let fullsize = document.getElementById("fullsize");
-            let thumbnails = document.querySelectorAll("thumbnail");
+            let thumbnails = document.querySelectorAll(".thumbnail");
 
-            // Show all thumbnails again
             fullsize.classList.remove("expanded");
+            fullsize.style.display = "none";
             fullsize.src = "";
             thumbnails.forEach(img => img.style.display = "block");
             isExpanded = false;
@@ -93,5 +92,9 @@
 
 </body>
 </html>
+
+
+
+
 
 	
