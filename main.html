@@ -1,16 +1,76 @@
 <!DOCTYPE html>
-
-<html>
-
+<html lang="en">
 <head>
-	<link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Grid Thumbnail</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin: 20px;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            width: 80%;
+            margin: auto;
+        }
+        .thumbnail {
+            width: 100%;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+            border-radius: 5px;
+        }
+        .thumbnail:hover {
+            transform: scale(1.05);
+        }
+        .fullsize {
+            display: none;
+            width: 100%;
+            height: auto;
+            grid-column: span 3;
+        }
+        .expanded {
+            display: block;
+            grid-column: span 3;
+            width: 100%;
+        }
+    </style>
 </head>
-
 <body>
-	<!-- the entire body must be written by student -->
-    <script type="text/javascript" src="./script.js">
-</script>
+
+    <h2>Image Grid Thumbnails</h2>
+    <div class="grid-container">
+        <img id="thumbnail1" class="thumbnail" src="https://bikekharido.in/wp-content/uploads/2022/01/TVS-Jupiter-Classic-ET-Fi.png" onclick="expandImage(this)">
+        <img id="thumbnail2" class="thumbnail" src="https://imgd.aeplcdn.com/1056x594/n/cw/ec/46749/tvs-jupiter-front-three-quarter25.jpeg?q=75" onclick="expandImage(this)">
+        <img id="thumbnail3" class="thumbnail" src="https://www.motorbeam.com/wp-content/uploads/TVS-Jupiter-Classic-Edition.jpg" onclick="expandImage(this)">
+        
+        <img id="fullsize" class="fullsize">
+    </div>
+
+    <script>
+        function expandImage(imgElement) {
+            let fullsize = document.getElementById("fullsize");
+            let thumbnails = document.querySelectorAll(".thumbnail");
+
+            if (fullsize.src === imgElement.src) {
+                // Collapse the expanded image
+                fullsize.src = "";
+                fullsize.classList.remove("expanded");
+                thumbnails.forEach(img => img.style.display = "block");
+            } else {
+                // Expand the clicked image
+                fullsize.src = imgElement.src;
+                fullsize.classList.add("expanded");
+                thumbnails.forEach(img => img.style.display = "none");
+            }
+        }
+    </script>
 
 </body>
-
 </html>
+
+	
